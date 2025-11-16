@@ -1,5 +1,21 @@
 use std::collections::HashMap;
 
+fn get_words(text: &str) -> Vec<String> {
+    text.split_whitespace().map(|w| w.to_string()).collect()
+}
+
+fn replace_x_with_y_in_place(
+    mut words: Vec<String>,
+    substitutions: &HashMap<String, String>,
+) -> Vec<String> {
+    for word in words.iter_mut() {
+        if let Some(new_word) = substitutions.get(&word.to_lowercase()) {
+            *word = new_word.clone();
+        }
+    }
+    words
+}
+
 fn main() {
     let contents = String::from("This is the first line\nThe second line is a little longer\nLine 3 is short\nThe 4th line is the first non-prime\nThe 5th line has the starting five");
     let replacement_map = HashMap::from([
@@ -7,9 +23,8 @@ fn main() {
         ("line".to_string(), "entry".to_string()),
     ]);
 
-    // Implement the get_words and replace_x_with_y_in_place functions
-    //let words = get_words(&contents);
-    //let new_words = replace_x_with_y_in_place(words.clone(), &replacement_map);
+    let words = get_words(&contents);
+    let new_words = replace_x_with_y_in_place(words.clone(), &replacement_map);
 
-    //println!("{:?}", new_words);
+    println!("{:?}", new_words);
 }
