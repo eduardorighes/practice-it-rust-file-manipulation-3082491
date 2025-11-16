@@ -1,9 +1,5 @@
 fn get_words(text: &str) -> Vec<String> {
-    let words: Vec<String> = text
-        .split_whitespace()
-        .map(|w| w.to_string())
-        .collect();
-    words
+    text.split_whitespace().map(|w| w.to_string()).collect()
 }
 
 fn main() {
